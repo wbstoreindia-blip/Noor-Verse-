@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#0B3D2E" />
+  <meta name="description" content="NoorVerse – Your Islamic Companion App" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>NoorVerse</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="logo.png" />
+  <link rel="apple-touch-icon" href="logo.png" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Google Fonts: Amiri (Arabic/Islamic) + Cinzel (display) + Lato (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ====== HEADER ====== -->
+  <header id="app-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <img src="logo.png" alt="NoorVerse Logo" class="header-logo" onerror="this.style.display='none'" />
+        <span class="header-title">NoorVerse</span>
+      </div>
+      <div class="header-right">
+        <button class="icon-btn" id="search-toggle-btn" aria-label="Search" title="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <button class="icon-btn" id="install-btn-header" aria-label="Install App" title="Install App" style="display:none;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </button>
+        <button class="icon-btn" id="menu-toggle-btn" aria-label="Menu" title="Menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="12" cy="19" r="1.2"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ====== MENU OVERLAY ====== -->
+  <div id="menu-overlay" class="menu-overlay" aria-hidden="true"></div>
+  <nav id="side-menu" class="side-menu" aria-label="Navigation Menu">
+    <div class="side-menu-header">
+      <img src="logo.png" alt="NoorVerse" class="menu-logo" onerror="this.style.display='none'" />
+      <span class="menu-title">NoorVerse</span>
+      <button class="icon-btn close-menu-btn" id="close-menu-btn" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <ul class="menu-list">
+      <li><button class="menu-item" data-action="home">
+        <span class="menu-icon">🏠</span> Home
+      </button></li>
+      <li><button class="menu-item" data-action="install">
+        <span class="menu-icon">📲</span> Install App
+      </button></li>
+      <li><button class="menu-item" data-action="about">
+        <span class="menu-icon">ℹ️</span> About
+      </button></li>
+      <li><button class="menu-item" data-action="contact">
+        <span class="menu-icon">📬</span> Contact Admin
+      </button></li>
+    </ul>
+  </nav>
+
+  <!-- ====== VIEWS CONTAINER ====== -->
+  <main id="views-container">
+
+    <!-- === DASHBOARD VIEW === -->
+    <div id="view-dashboard" class="view active">
+      <div class="dashboard-hero">
+        <div class="hero-bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+        <h1 class="hero-heading">Welcome to NoorVerse</h1>
+        <p class="hero-sub">Your complete Islamic companion</p>
+      </div>
+      <div class="dashboard-grid">
+        <button class="dash-card" id="card-quran" data-view="surah-list">
+          <div class="card-glow"></div>
+          <img src="quraan.png" alt="Al-Quran" class="card-icon" onerror="this.classList.add('icon-fallback')" />
+          <span class="card-label">Al‑Quran</span>
+          <span class="card-sub">Read &amp; Listen</span>
+        </button>
+        <button class="dash-card" id="card-qibla" data-view="qibla">
+          <div class="card-glow"></div>
+          <img src="compass.png" alt="Qibla" class="card-icon" onerror="this.classList.add('icon-fallback')" />
+          <span class="card-label">Qibla</span>
+          <span class="card-sub">Find Direction</span>
+        </button>
+        <button class="dash-card" id="card-prayer" data-view="prayer">
+          <div class="card-glow"></div>
+          <img src="prayer.png" alt="Prayer Times" class="card-icon" onerror="this.classList.add('icon-fallback')" />
+          <span class="card-label">Prayer Times</span>
+          <span class="card-sub">Daily Schedule</span>
+        </button>
+        <a class="dash-card" href="webquraan.pdf" target="_blank" rel="noopener">
+          <div class="card-glow"></div>
+          <img src="pdf.png" alt="PDF Quran" class="card-icon" onerror="this.classList.add('icon-fallback')" />
+          <span class="card-label">Read PDF</span>
+          <span class="card-sub">Quran eBook</span>
+        </a>
+      </div>
+      <div class="dashboard-hadith">
+        <div class="hadith-label">Daily Reminder</div>
+        <p class="hadith-text">"The best among you are those who learn the Quran and teach it." — Prophet Muhammad ﷺ</p>
+      </div>
+    </div>
+
+    <!-- === SURAH LIST VIEW === -->
+    <div id="view-surah-list" class="view">
+      <div class="view-header">
+        <button class="back-btn" data-back="dashboard" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+          Back
+        </button>
+        <h2 class="view-title">Al‑Quran</h2>
+      </div>
+      <div class="surah-search-bar">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="surah-search-input" placeholder="Search Surah name, number or Arabic…" autocomplete="off" autocorrect="off" />
+        <div id="search-spinner" class="search-spinner" style="display:none;"></div>
+      </div>
+      <div id="surah-list-container" class="surah-list-container">
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <p>Loading Surahs…</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- === QURAN READER VIEW === -->
+    <div id="view-reader" class="view">
+      <div class="view-header">
+        <button class="back-btn" data-back="surah-list" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+          Surahs
+        </button>
+        <h2 class="view-title" id="reader-title">Surah</h2>
+      </div>
+      <div id="reader-content" class="reader-content">
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <p>Loading Surah…</p>
+        </div>
+      </div>
+      <!-- Translation block (hidden by default) -->
+      <div id="translation-block" class="translation-block" style="display:none;"></div>
+
+      <!-- FAB Buttons -->
+      <div class="fab-group">
+        <button class="fab-btn fab-translation" id="fab-translation" title="See Translation" aria-label="See Translation">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 8l6 6"/><path d="M4 14l6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="M22 22l-5-10-5 10"/><path d="M14 18h6"/></svg>
+        </button>
+        <button class="fab-btn fab-play" id="fab-play" title="Play Recitation" aria-label="Play Recitation">
+          <img src="icon-play.png" alt="Play" onerror="this.parentNode.innerHTML='▶'" style="width:28px;height:28px;object-fit:contain;" />
+        </button>
+      </div>
+    </div>
+
+    <!-- === QIBLA VIEW === -->
+    <div id="view-qibla" class="view">
+      <div class="view-header">
+        <button class="back-btn" data-back="dashboard" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+          Back
+        </button>
+        <h2 class="view-title">Qibla Compass</h2>
+      </div>
+      <div class="qibla-container">
+        <div class="qibla-info" id="qibla-info">
+          <div class="spinner"></div>
+          <p>Getting your location…</p>
+        </div>
+        <div class="compass-wrapper" id="compass-wrapper" style="display:none;">
+          <div class="compass-ring">
+            <img src="compass_dial_3d.png" alt="Compass Dial" class="compass-dial-img" onerror="this.style.display='none'" style="position:absolute;width:100%;height:100%;z-index:1;object-fit:contain;" />
+            <img src="needle.png" alt="Qibla Needle" id="qibla-needle" style="position:absolute;width:100%;height:100%;z-index:2;padding:15%;object-fit:contain;transform-origin:center center;" onerror="this.style.display='none'" />
+          </div>
+          <div class="qibla-bearing-info">
+            <span class="bearing-label">Qibla Direction</span>
+            <span class="bearing-value" id="qibla-bearing-display">—°</span>
+          </div>
+          <p class="qibla-hint" id="qibla-hint">Point your phone toward the Kaaba ✦</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- === PRAYER TIMES VIEW === -->
+    <div id="view-prayer" class="view">
+      <div class="view-header">
+        <button class="back-btn" data-back="dashboard" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+          Back
+        </button>
+        <h2 class="view-title">Prayer Times</h2>
+      </div>
+      <div id="prayer-content" class="prayer-content">
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <p>Fetching prayer times…</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ====== MODALS ====== -->
+
+  <!-- Recitation Modal -->
+  <div id="modal-recitation" class="modal-overlay" aria-hidden="true">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>🎙️ Play Recitation</h3>
+        <button class="modal-close" data-close="modal-recitation" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <label class="modal-label">Reciter</label>
+        <select id="reciter-select" class="modal-select">
+          <option value="ar.alafasy">Mishary Alafasy</option>
+          <option value="ar.sudais">Abdul Rahman Al-Sudais</option>
+          <option value="ar.shuraim">Saud Al-Shuraim</option>
+          <option value="ar.mahermuaiqly">Maher Al-Muaiqly</option>
+          <option value="ar.shatri">Abu Bakr Al-Shatri</option>
+        </select>
+        <label class="modal-label">Range (Ayah)</label>
+        <div class="range-row">
+          <div class="range-field">
+            <span>From</span>
+            <input type="number" id="rec-start" min="1" value="1" class="modal-input" />
+          </div>
+          <div class="range-field">
+            <span>To</span>
+            <input type="number" id="rec-end" min="1" value="7" class="modal-input" />
+          </div>
+        </div>
+        <button class="modal-btn-secondary" id="rec-full-btn">Full Surah</button>
+        <div class="modal-actions">
+          <button class="modal-btn-primary" id="rec-start-btn">▶ Start</button>
+          <button class="modal-btn-danger" id="rec-stop-btn">⏹ Stop</button>
+        </div>
+        <div id="rec-status" class="rec-status"></div>
+        <audio id="quran-audio" preload="none"></audio>
+      </div>
+    </div>
+  </div>
+
+  <!-- Translation Modal -->
+  <div id="modal-translation" class="modal-overlay" aria-hidden="true">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>🌐 See Translation</h3>
+        <button class="modal-close" data-close="modal-translation" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <label class="modal-label">Language</label>
+        <select id="lang-select" class="modal-select">
+          <option value="en.asad">English (Asad)</option>
+          <option value="ur.jalandhry">Urdu (Jalandhry)</option>
+          <option value="bn.bengali">Bengali</option>
+        </select>
+        <label class="modal-label">Range (Ayah)</label>
+        <div class="range-row">
+          <div class="range-field">
+            <span>From</span>
+            <input type="number" id="tr-start" min="1" value="1" class="modal-input" />
+          </div>
+          <div class="range-field">
+            <span>To</span>
+            <input type="number" id="tr-end" min="1" value="7" class="modal-input" />
+          </div>
+        </div>
+        <button class="modal-btn-secondary" id="tr-full-btn">Full Surah</button>
+        <div class="modal-actions">
+          <button class="modal-btn-primary" id="tr-show-btn">Show Translation</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- About Modal -->
+  <div id="modal-about" class="modal-overlay" aria-hidden="true">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>ℹ️ About</h3>
+        <button class="modal-close" data-close="modal-about" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="about-content">
+          <div class="about-avatar">AR</div>
+          <h4 class="about-name">Abdur Rahman Mallik</h4>
+          <p class="about-text">A dedicated student of Islam and technology, passionate about creating Islamic digital tools to benefit the Ummah. His mission is to combine knowledge and technology to help Muslims connect with the Quran.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Modal -->
+  <div id="modal-contact" class="modal-overlay" aria-hidden="true">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>📬 Contact Admin</h3>
+        <button class="modal-close" data-close="modal-contact" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="contact-links">
+          <a href="https://wa.me/919239529167" class="contact-link whatsapp" target="_blank" rel="noopener">
+            <span class="contact-icon">💬</span>
+            <span>WhatsApp</span>
+          </a>
+          <a href="https://youtube.com/@ayatserenity-t4i?si=t5k33A2qdxutiAIP" class="contact-link youtube" target="_blank" rel="noopener">
+            <span class="contact-icon">▶️</span>
+            <span>YouTube</span>
+          </a>
+          <a href="https://www.instagram.com/mallik.edittion" class="contact-link instagram" target="_blank" rel="noopener">
+            <span class="contact-icon">📸</span>
+            <span>Instagram</span>
+          </a>
+          <a href="mailto:mallikabdurrahman37@gmail.com" class="contact-link email">
+            <span class="contact-icon">✉️</span>
+            <span>Email</span>
+          </a>
+          <a href="https://getversaindia-star.github.io/abdurrahmanmallik.com/" class="contact-link website" target="_blank" rel="noopener">
+            <span class="contact-icon">🌐</span>
+            <span>Website</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== INSTALL BANNER ====== -->
+  <div id="install-banner" class="install-banner" style="display:none;">
+    <div class="install-banner-inner">
+      <div class="install-banner-text">
+        <span class="install-icon">📲</span>
+        <div>
+          <strong>Install NoorVerse</strong>
+          <small>Get the full app experience</small>
+        </div>
+      </div>
+      <div class="install-banner-actions">
+        <a href="https://drive.google.com/uc?id=1io4qGGLfmK3XIA_KFbffTpPbcS2SziG0" class="install-apk-btn" target="_blank" rel="noopener">Install App (APK)</a>
+        <button class="install-dismiss-btn" id="install-dismiss-btn" aria-label="Dismiss">✕</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
